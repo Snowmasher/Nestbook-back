@@ -16,7 +16,7 @@ class AsociacionController extends Controller
      */
     public function index()
     {
-        //
+        return Asociacion::all();
     }
 
     public function asociacion($id_asoc) {

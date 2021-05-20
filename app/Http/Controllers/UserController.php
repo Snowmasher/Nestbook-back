@@ -19,6 +19,20 @@ class UserController extends Controller
         return $request->user();
     }
 
+    public function usersByAsoc(int $id_asoc) {
+
+        $users = User::where('id_asociacion', '=', 1)->get();
+        $users = json_decode($users);
+        return $users;
+    }
+
+    public function getMods() {
+
+        $users = User::where('rol', '=', 'M')->get();
+        $users = json_decode($users);
+        return $users;
+    }
+
     public function register(UserRegisterRequest $request)
 {
         User::create([

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Canario;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CanarioController extends Controller
@@ -15,6 +16,18 @@ class CanarioController extends Controller
     public function index()
     {
         //
+    }
+
+    /**
+     * Display a listing of the resource by User.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function byUser(int $id_user)
+    {
+        $ret = Canario::where('id_usuario', '=', $id_user )->get();
+
+        return json_decode($ret);
     }
 
     /**
