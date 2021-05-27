@@ -9,6 +9,9 @@ class Asociacion extends Model
 {
     use HasFactory;
 
+    protected $table = 'asociacions';
+
+    protected $primaryKey = 'id';
 
 
     /**
@@ -36,5 +39,9 @@ class Asociacion extends Model
      */
     protected $casts = [
     ];
+
+    public function id_mod(){
+        return $this->belongsTo(User::class);
+    }
 
 }

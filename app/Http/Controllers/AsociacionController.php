@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AsocInfoBarRequest;
 use App\Models\Asociacion;
 use Illuminate\Http\Request;
-use PhpParser\Node\Stmt\Foreach_;
-
 class AsociacionController extends Controller
 {
     /**
@@ -19,20 +17,18 @@ class AsociacionController extends Controller
         return Asociacion::all();
     }
 
-    public function asociacion($id_asoc) {
+    public function asociacion($id_asoc)
+    {
 
         $asociaciones = Asociacion::All();
 
         foreach ($asociaciones as $asoc) {
             if ($asoc['id'] == $id_asoc) {
                 return Asociacion::find($id_asoc);
-            }
-            else{
+            } else {
                 return -1;
             }
         }
-
-
     }
 
     /**
@@ -53,7 +49,17 @@ class AsociacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        //dd($request);
+        Asociacion::create(array(
+            "nombre" => $request[0]['nombre'],
+            "id_mod" => $request[0]['id_mod'],
+        ));
+
+        return response()->json([
+            'message' => 'success',
+            'status' => 201
+        ]);
     }
 
     /**

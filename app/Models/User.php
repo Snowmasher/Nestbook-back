@@ -19,7 +19,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'realname',
+        'real_name',
+        'id_asociacion',
         'rol',
         'email',
         'password',
@@ -35,6 +36,9 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected $table = 'users';
+
+    protected $primaryKey = 'id';
     /**
      * The attributes that should be cast to native types.
      *
@@ -42,8 +46,12 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'id_asociacion' => 'integer'
     ];
 
+    public function id_asociacion(){
+        return $this->belongsTo(Asociacion::class);
+    }
 
 
 }

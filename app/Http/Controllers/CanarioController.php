@@ -57,9 +57,11 @@ class CanarioController extends Controller
      * @param  \App\Models\Canario  $canario
      * @return \Illuminate\Http\Response
      */
-    public function show(Canario $canario)
+    public function show(int $id_canario)
     {
+        $ret = Canario::where('id', '=', $id_canario )->get();
 
+        return json_decode($ret);
     }
 
     /**

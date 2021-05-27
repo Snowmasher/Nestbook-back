@@ -22,7 +22,7 @@ class AsociacionFactory extends Factory
     public function definition()
     {
         return [
-            'nombre' => $this->faker->unique()->name(),
+            'nombre' => "AdmHome",
             'id_mod' => 1
         ];
     }
