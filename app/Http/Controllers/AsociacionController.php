@@ -20,15 +20,9 @@ class AsociacionController extends Controller
     public function asociacion($id_asoc)
     {
 
-        $asociaciones = Asociacion::All();
-
-        foreach ($asociaciones as $asoc) {
-            if ($asoc['id'] == $id_asoc) {
-                return Asociacion::find($id_asoc);
-            } else {
-                return -1;
-            }
-        }
+        $asociacion = Asociacion::where('id', '=', $id_asoc)->get();
+        $asociacion = json_decode($asociacion);
+        return $asociacion;
     }
 
     /**

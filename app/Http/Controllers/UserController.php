@@ -22,7 +22,7 @@ class UserController extends Controller
 
     public function usersByAsoc(int $id_asoc) {
 
-        $users = User::where('id_asociacion', '=', 1)->get();
+        $users = User::where('id_asociacion', '=', $id_asoc)->get();
         $users = json_decode($users);
         return $users;
     }
@@ -81,7 +81,7 @@ class UserController extends Controller
             User::create(array(
                 "name" => $user[0]['name'],
                 "real_name" => $user[0]['real_name'],
-                "id_asociacion" => 1,
+                "id_asociacion" => $user[0]['id_asociacion'],
                 "rol" => 'M',
                 "email" => $user[0]['email'],
                 "password" => Hash::make($user[0]['password']),
@@ -100,9 +100,11 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(int $id)
     {
-
+        $users = User::where('id', '=', $id)->get();
+        $users = json_decode($users);
+        return $users;
     }
 
     /**
@@ -123,9 +125,23 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function updateMod(Request $request)
     {
-        //
+        $user = new User();
+
+        $user = User::where('id', '=', $request[0]['id'])->first();
+
+        $user->name = $request[0]['name'];
+        $user->real_name = $request[0]['real_name'];
+        $user->id_asociacion = $request[0]['id_asociacion'];
+        $user->rol = 'M';
+        $user->password = $request[0]['password'];
+
+        $user->save();
+
+        return response()->json([
+            'message' => 'success'
+        ]);
     }
 
     /**

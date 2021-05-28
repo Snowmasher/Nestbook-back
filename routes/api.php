@@ -25,7 +25,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/user', '\App\Http\Controllers\UserController@user')->middleware('auth:api');
 
+Route::get('/user/{id}', [UserController::class, 'show']);
+
 Route::post('/user/create', [UserController::class, 'store']);
+
+Route::put('/user/updateMod', [UserController::class, 'updateMod']);
 
 Route::post('/user/createMod', [UserController::class, 'storeMod']);
 
@@ -39,8 +43,12 @@ Route::get('/asociacion/getAll', [AsociacionController::class, 'index']);
 
 Route::get('/asociacion/{id_asoc}', [AsociacionController::class, 'asociacion']);
 
+Route::post('/canario/create', [CanarioController::class, 'store']);
+
 Route::get('/canario/user/{id_user}', [CanarioController::class, 'byUser']);
 
 Route::get('/canario/{canario}', [CanarioController::class, 'show']);
+
+Route::post('/posts/create', [PublicacionController::class, 'store']);
 
 Route::get('/posts/{id_asocciacion}', [PublicacionController::class, 'index']);

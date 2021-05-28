@@ -48,7 +48,19 @@ class CanarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Canario::create(array(
+            "num_anilla" => $request[0]['num_anilla'],
+            "num_anilla_padre" => $request[0]['num_anilla_padre'],
+            "num_anilla_madre" => $request[0]['num_anilla_madre'],
+            "id_usuario" => $request[0]['id_usuario'],
+            "sexo" => $request[0]['sexo'],
+            "fecha_nacimiento" => $request[0]['fecha_nacimiento'],
+        ));
+
+    return response()->json([
+        'message' => 'success',
+        'status' => 201
+    ]);
     }
 
     /**

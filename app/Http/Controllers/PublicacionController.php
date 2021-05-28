@@ -14,7 +14,7 @@ class PublicacionController extends Controller
      */
     public function index($id_asoc)
     {
-        $ret = Publicacion::where('id_asociacion', '=', $id_asoc )->get();
+        $ret = Publicacion::where('id_asociacion', '=', $id_asoc )->orderBy('created_at')->get();
 
         return json_decode($ret);
     }
@@ -37,7 +37,16 @@ class PublicacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Publicacion::create(array(
+            "id_asociacion" => $request[0]['id_asociacion'],
+            "titulo" => $request[0]['titulo'],
+            "contenido" => $request[0]['contenido']
+        ));
+
+    return response()->json([
+        'message' => 'success',
+        'status' => 201
+    ]);
     }
 
     /**
