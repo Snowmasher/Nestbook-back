@@ -14,7 +14,7 @@ class PublicacionController extends Controller
      */
     public function index($id_asoc)
     {
-        $ret = Publicacion::where('id_asociacion', '=', $id_asoc )->orderBy('created_at')->get();
+        $ret = Publicacion::where('id_asociacion', '=', $id_asoc )->orderBy('created_at', 'desc')->get();
 
         return json_decode($ret);
     }
