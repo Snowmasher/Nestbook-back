@@ -122,6 +122,6 @@ class CanarioController extends Controller
      */
     public function destroy(Canario $canario)
     {
-        //
+        Canario::where('id', '=', $canario[0]['id'])->delete();
     }
 }

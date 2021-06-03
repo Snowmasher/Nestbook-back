@@ -165,8 +165,8 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $publicacion)
+    public function destroy(User $user)
     {
-        //
+        User::where('id', '=', $user[0]['id'])->delete();
     }
 }

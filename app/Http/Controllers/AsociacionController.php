@@ -109,6 +109,6 @@ class AsociacionController extends Controller
      */
     public function destroy(Asociacion $asociacion)
     {
-        //
+        Asociacion::where('id', '=', $asociacion[0]['id'])->delete();
     }
 }

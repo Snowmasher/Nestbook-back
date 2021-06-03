@@ -103,6 +103,6 @@ class PublicacionController extends Controller
      */
     public function destroy(Publicacion $publicacion)
     {
-        //
+        Publicacion::where('id', '=', $publicacion[0]['id'])->delete();
     }
 }
