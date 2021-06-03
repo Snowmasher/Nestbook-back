@@ -72,15 +72,27 @@ class PublicacionController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified post in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Publicacion  $publicacion
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Publicacion $publicacion)
+    public function update(Request $request)
     {
-        //
+        $publicacion = new Publicacion();
+
+        $publicacion = Publicacion::where('id', '=', $request[0]['id'])->first();
+
+        $publicacion->name = $request[0]['titulo'];
+        $publicacion->real_name = $request[0]['contenido'];
+        $publicacion->id_asociacion = $request[0]['id_asociacion'];
+
+        $publicacion->save();
+
+        return response()->json([
+            'message' => 'success'
+        ]);
     }
 
     /**

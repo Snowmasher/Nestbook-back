@@ -108,18 +108,33 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Update the specified user in storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function update(Request $request)
     {
-        //
+        $user = new User();
+
+        $user = User::where('id', '=', $request[0]['id'])->first();
+
+        $user->name = $request[0]['name'];
+        $user->real_name = $request[0]['real_name'];
+        $user->id_asociacion = $request[0]['id_asociacion'];
+        $user->rol = 'U';
+        $user->password = $request[0]['password'];
+
+        $user->save();
+
+        return response()->json([
+            'message' => 'success'
+        ]);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified mod in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\User  $user

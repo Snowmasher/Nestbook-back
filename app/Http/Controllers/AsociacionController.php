@@ -87,7 +87,18 @@ class AsociacionController extends Controller
      */
     public function update(Request $request, Asociacion $asociacion)
     {
-        //
+        $asociacion = new Asociacion();
+
+        $asociacion = Asociacion::where('id', '=', $request[0]['id'])->first();
+
+        $asociacion->nombre = $request[0]['nombre'];
+        $asociacion->id_mod = $request[0]['id_mod'];
+
+        $asociacion->save();
+
+        return response()->json([
+            'message' => 'success'
+        ]);
     }
 
     /**
