@@ -150,7 +150,7 @@ class UserController extends Controller
         $user->real_name = $request[0]['real_name'];
         $user->id_asociacion = $request[0]['id_asociacion'];
         $user->rol = 'M';
-        $user->password = $request[0]['password'];
+        $user->password = Hash::make($request[0]['password']);
 
         $user->save();
 

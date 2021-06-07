@@ -55,9 +55,11 @@ class PublicacionController extends Controller
      * @param  \App\Models\Publicacion  $publicacion
      * @return \Illuminate\Http\Response
      */
-    public function show(Publicacion $publicacion)
+    public function show($id)
     {
-        //
+        $ret = Publicacion::where('id', '=', $id)->get();
+
+        return json_decode($ret);
     }
 
     /**
@@ -84,8 +86,8 @@ class PublicacionController extends Controller
 
         $publicacion = Publicacion::where('id', '=', $request[0]['id'])->first();
 
-        $publicacion->name = $request[0]['titulo'];
-        $publicacion->real_name = $request[0]['contenido'];
+        $publicacion->titulo = $request[0]['titulo'];
+        $publicacion->contenido = $request[0]['contenido'];
         $publicacion->id_asociacion = $request[0]['id_asociacion'];
 
         $publicacion->save();

@@ -17,14 +17,6 @@ class AsociacionController extends Controller
         return Asociacion::all();
     }
 
-    public function asociacion($id_asoc)
-    {
-
-        $asociacion = Asociacion::where('id', '=', $id_asoc)->get();
-        $asociacion = json_decode($asociacion);
-        return $asociacion;
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -62,9 +54,12 @@ class AsociacionController extends Controller
      * @param  \App\Models\Asociacion  $asociacion
      * @return \Illuminate\Http\Response
      */
-    public function show(Asociacion $asociacion)
+    public function show($id_asoc)
     {
-        //
+
+        $asociacion = Asociacion::where('id', '=', $id_asoc)->get();
+        $asociacion = json_decode($asociacion);
+        return $asociacion;
     }
 
     /**

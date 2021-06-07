@@ -47,7 +47,7 @@ Route::put('/asociacion/update', [AsociacionController::class, 'update']);
 
 Route::get('/asociacion/getAll', [AsociacionController::class, 'index']);
 
-Route::get('/asociacion/{id_asoc}', [AsociacionController::class, 'asociacion']);
+Route::get('/asociacion/{id_asoc}', [AsociacionController::class, 'show']);
 
 // Canarios
 
@@ -66,3 +66,5 @@ Route::post('/posts/create', [PublicacionController::class, 'store']);
 Route::put('/posts/update', [PublicacionController::class, 'update']);
 
 Route::get('/posts/{id_asocciacion}', [PublicacionController::class, 'index']);
+
+Route::get('/posts/show/{id}', [PublicacionController::class, 'show']);
