@@ -39,6 +39,8 @@ Route::get('/usersByAsoc/{id_asoc}', [UserController::class, 'usersByAsoc']);
 
 Route::get('/getMods', [UserController::class, 'getMods']);
 
+Route::get('/user/getDifferents/{id}', [UserController::class, 'differents']);
+
 // Asociaciones
 
 Route::post('/asociacion/create', [AsociacionController::class, 'store']);

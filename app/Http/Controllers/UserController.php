@@ -97,12 +97,25 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show(int $id)
     {
         $users = User::where('id', '=', $id)->get();
+        $users = json_decode($users);
+        return $users;
+    }
+
+    /**
+     * Display different users of the specified user.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function differents(int $id)
+    {
+        $users = User::where('id', '!=', $id)->get();
         $users = json_decode($users);
         return $users;
     }
@@ -148,7 +161,6 @@ class UserController extends Controller
 
         $user->name = $request[0]['name'];
         $user->real_name = $request[0]['real_name'];
-        $user->id_asociacion = $request[0]['id_asociacion'];
         $user->rol = 'M';
         $user->password = Hash::make($request[0]['password']);
 

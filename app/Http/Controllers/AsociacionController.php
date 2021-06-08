@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AsocInfoBarRequest;
 use App\Models\Asociacion;
+use App\Models\User;
 use Illuminate\Http\Request;
 class AsociacionController extends Controller
 {
@@ -90,6 +91,14 @@ class AsociacionController extends Controller
         $asociacion->id_mod = $request[0]['id_mod'];
 
         $asociacion->save();
+
+        // Cambiamos el id_asociacion al moderador elegido
+
+        $user = User::where('id', '=', $request[0]['id_mod'])->first();
+
+        $user->id_asociacion = $request[0]['id'];
+
+        $user->save();
 
         return response()->json([
             'message' => 'success'

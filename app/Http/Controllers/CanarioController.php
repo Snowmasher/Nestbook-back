@@ -94,18 +94,14 @@ class CanarioController extends Controller
      * @param  \App\Models\Canario  $canario
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Canario $canario)
+    public function update(Request $request)
     {
         $canario = new Canario();
 
         $canario = Canario::where('id', '=', $request[0]['id'])->first();
-
-        $canario->num_anilla = $request[0]['titulo'];
-        $canario->num_anilla_madre = $request[0]['num_anilla_madre'];
-        $canario->num_anilla_padre = $request[0]['num_anilla_padre'];
-        $canario->id_usuario = $request[0]['num_anilla_padre'];
-        $canario->fecha_nacimiento = $request[0]['fecha_nacimiento'];
-        $canario->fecha_nacimiento = $request[0]['sexo'];
+        
+        $canario->id_usuario = $request[0]['id_usuario'];
+        $canario->sexo = $request[0]['sexo'];
 
         $canario->save();
 
