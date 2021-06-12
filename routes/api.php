@@ -41,6 +41,8 @@ Route::get('/getMods', [UserController::class, 'getMods']);
 
 Route::get('/user/getDifferents/{id}', [UserController::class, 'differents']);
 
+Route::get('/user/deleteMod/{id}', [UserController::class, 'destroyMod']);
+
 // Asociaciones
 
 Route::post('/asociacion/create', [AsociacionController::class, 'store']);

@@ -177,8 +177,26 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($user)
     {
         User::where('id', '=', $user[0]['id'])->delete();
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyMod(int $user)
+    {
+
+        $rows = User::where('id', '=', $user);
+
+        $rows->delete();
+
+        return response()->json([
+            'message' => 'success'
+        ]);
     }
 }
