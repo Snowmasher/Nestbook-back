@@ -25,6 +25,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/user', '\App\Http\Controllers\UserController@user')->middleware('auth:api');
 
+Route::get('/user/searchAll', [UserController::class, 'index']);
+
 Route::get('/user/{id}', [UserController::class, 'show']);
 
 Route::post('/user/create', [UserController::class, 'store']);
