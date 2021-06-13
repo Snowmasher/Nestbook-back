@@ -68,10 +68,9 @@ class AsociacionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Asociacion  $asociacion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Asociacion $asociacion)
+    public function update(Request $request)
     {
         $asociacion = new Asociacion();
 
@@ -101,19 +100,15 @@ class AsociacionController extends Controller
      * @param  \App\Models\Asociacion  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($asociacion)
+    public function destroy(int $asociacion)
     {
-        $rows = Asociacion::where('id', '=', $asociacion);
-
-        $users = User::where('id_asociacion', '=', $asociacion);
-
-        foreach ($users as $key => $user) {
-            $user->id_asociacion = 1;
-
-            $user->save();
+        if ($asociacion !== 1){
+            $row = Asociacion::where('id', '=', $asociacion);
         }
 
-        $rows->delete();
+        User::where('id_asociacion', '=', $asociacion)->update(['id_asociacion' => 1]);
+
+        $row->delete();
 
         return response()->json([
             'message' => 'success'

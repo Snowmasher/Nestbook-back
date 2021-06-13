@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateUserRequest;
-use App\Http\Requests\UserRegisterRequest;
 use App\Models\User;
 use App\Models\Asociacion;
 use Illuminate\Http\Request;
@@ -37,19 +35,9 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
-    {
-
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request  $user
      * @return \Illuminate\Http\Response
      */
     public function store(Request $user)
@@ -74,7 +62,7 @@ class UserController extends Controller
 /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request  $user
      * @return \Illuminate\Http\Response
      */
     public function storeMod(Request $user)
@@ -189,7 +177,7 @@ class UserController extends Controller
      */
     public function destroy($user)
     {
-        $rows = User::where('id', '=', $user);
+        $rows = User::where('id', '=', $user)->where('rol', '!=', 'A')->where('rol', '!=', 'M');
 
         $rows->delete();
 
@@ -201,19 +189,17 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $user
+     * @param  int User ID $user
      * @return \Illuminate\Http\Response
      */
     public function destroyMod(int $user)
     {
 
-        $row = User::where('id', '=', $user);
+        $row = User::where('id', '=', $user)->where('rol', '!=', 'A')->where('rol', '!=', 'U');
 
         $id = User::where('id', '=', $user)->first()->id;
 
-        $asociacion = Asociacion::where('id_mod', '=', $id)->first();
-
-        $asociacion->id_mod = 1;
+        Asociacion::where('id_mod', '=', $id)->update(['id_mod' => 1]);
 
         $row->delete();
 
