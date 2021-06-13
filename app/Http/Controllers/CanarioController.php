@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Canario;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CanarioController extends Controller
 {
@@ -113,11 +114,17 @@ class CanarioController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Canario  $canario
+     * @param  \App\Models\Canario  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Canario $canario)
+    public function destroy($canario)
     {
-        Canario::where('id', '=', $canario[0]['id'])->delete();
+        $rows = Canario::where('id', '=', $canario);
+
+        $rows->delete();
+
+        return response()->json([
+            'message' => 'success'
+        ]);
     }
 }

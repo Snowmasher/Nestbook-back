@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Publicacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PublicacionController extends Controller
 {
@@ -100,11 +101,17 @@ class PublicacionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Publicacion  $publicacion
+     * @param  \App\Models\Publicacion  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Publicacion $publicacion)
+    public function destroy($publicacion)
     {
-        Publicacion::where('id', '=', $publicacion[0]['id'])->delete();
+        $rows = Publicacion::where('id', '=', $publicacion);
+
+        $rows->delete();
+
+        return response()->json([
+            'message' => 'success'
+        ]);
     }
 }

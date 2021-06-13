@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AsocInfoBarRequest;
 use App\Models\Asociacion;
 use App\Models\User;
 use Illuminate\Http\Request;
+
 class AsociacionController extends Controller
 {
     /**
@@ -19,16 +19,6 @@ class AsociacionController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -36,12 +26,23 @@ class AsociacionController extends Controller
      */
     public function store(Request $request)
     {
+        $id_mod = $request[0]['id_mod'];
+        $nombre = $request[0]['nombre'];
 
-        //dd($request);
-        Asociacion::create(array(
-            "nombre" => $request[0]['nombre'],
-            "id_mod" => $request[0]['id_mod'],
+        $asoc = Asociacion::create(array(
+            "nombre" => $nombre,
+            "id_mod" => $id_mod,
         ));
+
+        $last = Asociacion::orderBy('id', 'desc')->first();
+        
+        $id = $last->id;
+
+        $mod = User::where('id', '=', $id_mod)->first();
+
+        $mod->id_asociacion = $id;
+
+        $mod->save();
 
         return response()->json([
             'message' => 'success',
@@ -61,17 +62,6 @@ class AsociacionController extends Controller
         $asociacion = Asociacion::where('id', '=', $id_asoc)->get();
         $asociacion = json_decode($asociacion);
         return $asociacion;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Asociacion  $asociacion
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Asociacion $asociacion)
-    {
-        //
     }
 
     /**
@@ -108,11 +98,25 @@ class AsociacionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Asociacion  $asociacion
+     * @param  \App\Models\Asociacion  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Asociacion $asociacion)
+    public function destroy($asociacion)
     {
-        Asociacion::where('id', '=', $asociacion[0]['id'])->delete();
+        $rows = Asociacion::where('id', '=', $asociacion);
+
+        $users = User::where('id_asociacion', '=', $asociacion);
+
+        foreach ($users as $key => $user) {
+            $user->id_asociacion = 1;
+
+            $user->save();
+        }
+
+        $rows->delete();
+
+        return response()->json([
+            'message' => 'success'
+        ]);
     }
 }

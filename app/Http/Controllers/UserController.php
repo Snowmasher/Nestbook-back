@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UserRegisterRequest;
 use App\Models\User;
+use App\Models\Asociacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 
 class UserController extends Controller
@@ -164,7 +166,15 @@ class UserController extends Controller
         $user->rol = 'M';
         $user->password = Hash::make($request[0]['password']);
 
+        $asociacion = Asociacion::where('id_mod', '=', $request[0]['id'])->first();
+
+        $asociacion->id_mod = 1;
+
+        $asociacion->save();
+
         $user->save();
+
+
 
         return response()->json([
             'message' => 'success'
@@ -179,7 +189,13 @@ class UserController extends Controller
      */
     public function destroy($user)
     {
-        User::where('id', '=', $user[0]['id'])->delete();
+        $rows = User::where('id', '=', $user);
+
+        $rows->delete();
+
+        return response()->json([
+            'message' => 'success'
+        ]);
     }
 
     /**
@@ -191,9 +207,15 @@ class UserController extends Controller
     public function destroyMod(int $user)
     {
 
-        $rows = User::where('id', '=', $user);
+        $row = User::where('id', '=', $user);
 
-        $rows->delete();
+        $id = User::where('id', '=', $user)->first()->id;
+
+        $asociacion = Asociacion::where('id_mod', '=', $id)->first();
+
+        $asociacion->id_mod = 1;
+
+        $row->delete();
 
         return response()->json([
             'message' => 'success'

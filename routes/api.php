@@ -41,7 +41,9 @@ Route::get('/getMods', [UserController::class, 'getMods']);
 
 Route::get('/user/getDifferents/{id}', [UserController::class, 'differents']);
 
-Route::get('/user/deleteMod/{id}', [UserController::class, 'destroyMod']);
+Route::delete('/user/delete/{id}', [UserController::class, 'destroy']);
+
+Route::delete('/user/deleteMod/{id}', [UserController::class, 'destroyMod']);
 
 // Asociaciones
 
@@ -53,6 +55,9 @@ Route::get('/asociacion/getAll', [AsociacionController::class, 'index']);
 
 Route::get('/asociacion/{id_asoc}', [AsociacionController::class, 'show']);
 
+Route::delete('/asociacion/delete/{id}', [AsociacionController::class, 'destroy']);
+
+
 // Canarios
 
 Route::post('/canario/create', [CanarioController::class, 'store']);
@@ -63,6 +68,9 @@ Route::get('/canario/user/{id_user}', [CanarioController::class, 'byUser']);
 
 Route::get('/canario/{canario}', [CanarioController::class, 'show']);
 
+Route::delete('/canario/delete/{id}', [CanarioController::class, 'destroy']);
+
+
 // Publicaciones
 
 Route::post('/posts/create', [PublicacionController::class, 'store']);
@@ -72,3 +80,5 @@ Route::put('/posts/update', [PublicacionController::class, 'update']);
 Route::get('/posts/{id_asocciacion}', [PublicacionController::class, 'index']);
 
 Route::get('/posts/show/{id}', [PublicacionController::class, 'show']);
+
+Route::delete('/posts/delete/{id}', [PublicacionController::class, 'destroy']);
