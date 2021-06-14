@@ -47,6 +47,7 @@ class UserController extends Controller
                 "name" => $user[0]['name'],
                 "real_name" => $user[0]['real_name'],
                 "id_asociacion" => $user[0]['id_asociacion'],
+                "avatar" => 3,
                 "rol" => 'U',
                 "email" => $user[0]['email'],
                 "password" => Hash::make($user[0]['password']),
@@ -73,6 +74,7 @@ class UserController extends Controller
                 "real_name" => $user[0]['real_name'],
                 "id_asociacion" => $user[0]['id_asociacion'],
                 "rol" => 'M',
+                "avatar" => 2,
                 "email" => $user[0]['email'],
                 "password" => Hash::make($user[0]['password']),
             ));

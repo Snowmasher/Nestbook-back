@@ -41,6 +41,7 @@ class PublicacionController extends Controller
         Publicacion::create(array(
             "id_asociacion" => $request[0]['id_asociacion'],
             "titulo" => $request[0]['titulo'],
+            "url_img" => $request[0]['url_img'],
             "contenido" => $request[0]['contenido']
         ));
 
@@ -89,6 +90,7 @@ class PublicacionController extends Controller
 
         $publicacion->titulo = $request[0]['titulo'];
         $publicacion->contenido = $request[0]['contenido'];
+        $publicacion->url_img = $request[0]['url_img'];
         $publicacion->id_asociacion = $request[0]['id_asociacion'];
 
         $publicacion->save();

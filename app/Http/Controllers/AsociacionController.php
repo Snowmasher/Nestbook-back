@@ -28,10 +28,12 @@ class AsociacionController extends Controller
     {
         $id_mod = $request[0]['id_mod'];
         $nombre = $request[0]['nombre'];
+        $url_img = $request[0]['url_img'];
 
         $asoc = Asociacion::create(array(
             "nombre" => $nombre,
             "id_mod" => $id_mod,
+            "url_img" => $url_img
         ));
 
         $last = Asociacion::orderBy('id', 'desc')->first();
@@ -78,6 +80,7 @@ class AsociacionController extends Controller
 
         $asociacion->nombre = $request[0]['nombre'];
         $asociacion->id_mod = $request[0]['id_mod'];
+        $asociacion->url_img = $request[0]['url_img'];
 
         $asociacion->save();
 
