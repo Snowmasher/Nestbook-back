@@ -38,6 +38,7 @@ return array(
     'App\\Models\\Canario' => $baseDir . '/app/Models/Canario.php',
     'App\\Models\\Publicacion' => $baseDir . '/app/Models/Publicacion.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
+    'App\\Models\\notificacion' => $baseDir . '/app/Models/notificacion.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',

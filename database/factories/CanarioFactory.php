@@ -23,8 +23,8 @@ class CanarioFactory extends Factory
     {
         return [
             'num_anilla' => $this->faker->unique()->randomNumber($nbDigits = 8, $strict = true) . $this->faker->randomNumber($nbDigits = 4, $strict = true),
-            'num_anilla_padre' => $this->faker->unique()->randomNumber($nbDigits = 8) . $this->faker->randomNumber($nbDigits = 4),
-            'num_anilla_madre' => $this->faker->unique()->randomNumber($nbDigits = 8) . $this->faker->randomNumber($nbDigits = 4),
+            'num_anilla_padre' => $this->faker->unique()->randomNumber($nbDigits = 8, $strict = true) . $this->faker->randomNumber($nbDigits = 4, $strict = true),
+            'num_anilla_madre' => $this->faker->unique()->randomNumber($nbDigits = 8, $strict = true) . $this->faker->randomNumber($nbDigits = 4, $strict = true),
             'id_usuario' => $this->faker->numberBetween($min = 1, $max = 10),
             'sexo' => $this->faker->randomElement(array('H','M')),
             'fecha_nacimiento' => $this->faker->date($format = 'Y-m-d', $max = '1621272677'),

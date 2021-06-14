@@ -30,6 +30,7 @@ class AdminFactory extends Factory
             'real_name' => "Álvaro",
             'rol' => 'A',
             'id_asociacion' => 1,
+            'avatar' => 1,
             'email_verified_at' => now(),
             'password' => Hash::make("admin123"), // password
             'remember_token' => Str::random(10),

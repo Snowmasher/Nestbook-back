@@ -20,7 +20,8 @@ class Publicacion extends Model
     protected $fillable = [
         'id_asociacion',
         'titulo',
-        'contenido'
+        'contenido',
+        'url_img'
     ];
 
     /**

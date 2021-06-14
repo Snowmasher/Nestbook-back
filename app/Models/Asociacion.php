@@ -23,7 +23,8 @@ class Asociacion extends Model
      */
     protected $fillable = [
         'nombre',
-        'id_mod'
+        'id_mod',
+        'url_img'
     ];
 
     /**

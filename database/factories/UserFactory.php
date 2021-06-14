@@ -29,6 +29,7 @@ class UserFactory extends Factory
             'email' => "admin@nestbook.com",
             'real_name' => "Álvaro",
             'rol' => 'A',
+            'avatar' => 1,
             'id_asociacion' => 1,
             'email_verified_at' => now(),
             'password' => Hash::make("admin123"), // password

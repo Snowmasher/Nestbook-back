@@ -22,7 +22,7 @@ class AsociacionFactory extends Factory
     public function definition()
     {
         return [
-            'nombre' => "AdmHome",
+            'nombre' => "Admin Home",
             'id_mod' => 1
         ];
     }

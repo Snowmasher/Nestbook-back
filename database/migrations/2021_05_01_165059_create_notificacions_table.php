@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePublicacionsTable extends Migration
+class CreateNotificacionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,19 @@ class CreatePublicacionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('publicacions', function (Blueprint $table) {
+        Schema::create('notificacions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_asociacion');
-            $table->foreign('id_asociacion')->references('id')->on('asociacions');
-            $table->string('titulo');
+            $table->unsignedBigInteger('id_from');
+            $table->unsignedBigInteger('id_to');
+            $table->char('tipo');
             $table->text('contenido');
-            $table->string('url_img')->nullable();
+            $table->boolean('aceptada');
             $table->softDeletes();
             $table->timestamps();
+
+            $table->foreign('id_from')->references('id')->on('users');
+            $table->foreign('id_to')->references('id')->on('users');
+
         });
     }
 
@@ -32,6 +36,6 @@ class CreatePublicacionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('publicacions');
+        Schema::dropIfExists('notificacions');
     }
 }
