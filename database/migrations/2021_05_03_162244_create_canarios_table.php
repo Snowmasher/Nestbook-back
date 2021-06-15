@@ -15,9 +15,10 @@ class CreateCanariosTable extends Migration
     {
         Schema::create('canarios', function (Blueprint $table) {
             $table->id();
-            $table->string('num_anilla');
+            $table->string('num_anilla')->unique();
             $table->string('num_anilla_padre')->nullable();
             $table->string('num_anilla_madre')->nullable();
+            $table->string('url_img')->nullable();
             $table->unsignedBigInteger('id_usuario');
             $table->foreign('id_usuario')->references('id')->on('users');
             $table->char('sexo')->nullable();

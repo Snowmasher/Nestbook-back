@@ -32,16 +32,6 @@ class CanarioController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -53,6 +43,7 @@ class CanarioController extends Controller
             "num_anilla" => $request[0]['num_anilla'],
             "num_anilla_padre" => $request[0]['num_anilla_padre'],
             "num_anilla_madre" => $request[0]['num_anilla_madre'],
+            "url_img" => $request[0]['url_img'],
             "id_usuario" => $request[0]['id_usuario'],
             "sexo" => $request[0]['sexo'],
             "fecha_nacimiento" => $request[0]['fecha_nacimiento'],
@@ -78,17 +69,6 @@ class CanarioController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Canario  $canario
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Canario $canario)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -100,9 +80,9 @@ class CanarioController extends Controller
         $canario = new Canario();
 
         $canario = Canario::where('id', '=', $request[0]['id'])->first();
-        
-        $canario->id_usuario = $request[0]['id_usuario'];
+
         $canario->sexo = $request[0]['sexo'];
+        $canario->url_img = $request[0]['url_img'];
 
         $canario->save();
 

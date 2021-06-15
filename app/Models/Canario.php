@@ -21,6 +21,7 @@ class Canario extends Model
         'num_anilla',
         'num_anilla_padre',
         'num_anilla_madre',
+        'url_img',
         'id_usuario',
         'sexo',
         'fecha_nacimiento',
