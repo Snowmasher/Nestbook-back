@@ -100,6 +100,19 @@ class UserController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  string  $name
+     * @return \Illuminate\Http\Response
+     */
+    public function showByName(string $name)
+    {
+        $users = User::where('name', '=', $name)->get();
+        $users = json_decode($users);
+        return $users;
+    }
+
+    /**
      * Display different users of the specified user.
      *
      * @param  int  $id

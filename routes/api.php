@@ -4,6 +4,7 @@ use App\Http\Controllers\CanarioController;
 use App\Http\Controllers\AsociacionController;
 use App\Http\Controllers\PublicacionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\NotificacionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,8 @@ Route::get('/user', '\App\Http\Controllers\UserController@user')->middleware('au
 Route::get('/user/searchAll', [UserController::class, 'index']);
 
 Route::get('/user/{id}', [UserController::class, 'show']);
+
+Route::get('/userByName/{name}', [UserController::class, 'showByName']);
 
 Route::post('/user/create', [UserController::class, 'store']);
 
@@ -84,3 +87,7 @@ Route::get('/posts/{id_asocciacion}', [PublicacionController::class, 'index']);
 Route::get('/posts/show/{id}', [PublicacionController::class, 'show']);
 
 Route::delete('/posts/delete/{id}', [PublicacionController::class, 'destroy']);
+
+// Notificaciones
+
+Route::post('/notificacion/create', [NotificacionController::class, 'store']);

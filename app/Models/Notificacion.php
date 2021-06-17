@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class notificacion extends Model
+class Notificacion extends Model
 {
     use HasFactory, Notifiable, HasApiTokens;
 
@@ -25,7 +25,7 @@ class notificacion extends Model
         'id_from',
         'id_to',
         'tipo',
-        'conetido',
+        'contenido',
         'aceptada'
     ];
 
@@ -39,7 +39,8 @@ class notificacion extends Model
      */
     protected $casts = [
         'id_from' => 'integer',
-        'id_to' => 'integer'
+        'id_to' => 'integer',
+        'contenido' => 'string'
     ];
 
     public function id_from(){
