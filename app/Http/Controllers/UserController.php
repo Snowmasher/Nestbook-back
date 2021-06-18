@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Asociacion;
+use App\Models\Notificacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
@@ -44,14 +45,16 @@ class UserController extends Controller
     {
 
             User::create(array(
-                "name" => $user[0]['name'],
-                "real_name" => $user[0]['real_name'],
-                "id_asociacion" => $user[0]['id_asociacion'],
+                "name" => $user[0]['user']['name'],
+                "real_name" => $user[0]['user']['real_name'],
+                "id_asociacion" => $user[0]['user']['id_asociacion'],
                 "avatar" => 3,
                 "rol" => 'U',
-                "email" => $user[0]['email'],
-                "password" => Hash::make($user[0]['password']),
+                "email" => $user[0]['user']['email'],
+                "password" => Hash::make($user[0]['user']['password']),
             ));
+
+            Notificacion::destroy($user[0]['id']);
 
         return response()->json([
             'message' => 'success',

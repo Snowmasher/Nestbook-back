@@ -14,9 +14,11 @@ class NotificacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(int $id)
     {
-        return Notificacion::all();
+        $notificaciones = Notificacion::where('id_to', '=', $id)->get();
+        $notificaciones = json_decode($notificaciones);
+        return $notificaciones;
     }
 
     /**
@@ -25,7 +27,7 @@ class NotificacionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storeUser(Request $request)
     {
         $id_mod = Asociacion::where('id', '=', $request[0]['id_asociacion'])->first()->id_mod;
 
@@ -52,17 +54,45 @@ class NotificacionController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeIntercambio(Request $request)
+    {
+
+        $id_from = $request[0]['id_from'];
+        $id_to = $request[0]['id_to'];
+        $tipo = 'I';
+        $contenido = $request[0]['contenido'];
+        $aceptada = false;
+
+        Notificacion::create(array(
+            "id_from" => $id_from,
+            "id_to" => $id_to,
+            "tipo" => $tipo,
+            "contenido" => $contenido,
+            "aceptada" => $aceptada
+        ));
+
+        return response()->json([
+            'message' => 'success',
+            'status' => 201
+        ]);
+    }
+    /**
      * Display the specified resource.
      *
      * @param  \App\Models\Notificacion  $asociacion
      * @return \Illuminate\Http\Response
      */
-    public function show($id_asoc)
+    public function show($id)
     {
 
-        $asociacion = Notificacion::where('id', '=', $id_asoc)->get();
-        $asociacion = json_decode($asociacion);
-        return $asociacion;
+        $notificacion = Notificacion::where('id', '=', $id)->get();
+        $notificacion = json_decode($notificacion);
+        return $notificacion;
     }
 
     /**
@@ -102,13 +132,10 @@ class NotificacionController extends Controller
      * @param  \App\Models\Notificacion  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(int $asociacion)
+    public function destroy(int $notificacion)
     {
-        if ($asociacion !== 1){
-            $row = Notificacion::where('id', '=', $asociacion);
-        }
-
-        User::where('id_asociacion', '=', $asociacion)->update(['id_asociacion' => 1]);
+        
+        $row = Notificacion::where('id', '=', $notificacion);
 
         $row->delete();
 

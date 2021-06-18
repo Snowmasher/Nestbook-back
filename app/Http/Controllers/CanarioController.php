@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Canario;
+use App\Models\Notificacion;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -85,6 +86,24 @@ class CanarioController extends Controller
         $canario->url_img = $request[0]['url_img'];
 
         $canario->save();
+
+        return response()->json([
+            'message' => 'success'
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Canario  $canario
+     * @return \Illuminate\Http\Response
+     */
+    public function intercambio(Request $request)
+    {
+        Canario::where('id', '=', $request[0]['id_canario'])->update(array('id_usuario' => $request[0]['id_user']));
+
+        Notificacion::destroy($request[0]['id']);
 
         return response()->json([
             'message' => 'success'

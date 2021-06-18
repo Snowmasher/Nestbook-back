@@ -69,6 +69,8 @@ Route::post('/canario/create', [CanarioController::class, 'store']);
 
 Route::put('/canario/update', [CanarioController::class, 'update']);
 
+Route::put('/canario/intercambio', [CanarioController::class, 'intercambio']);
+
 Route::get('/canario/user/{id_user}', [CanarioController::class, 'byUser']);
 
 Route::get('/canario/{canario}', [CanarioController::class, 'show']);
@@ -90,4 +92,14 @@ Route::delete('/posts/delete/{id}', [PublicacionController::class, 'destroy']);
 
 // Notificaciones
 
-Route::post('/notificacion/create', [NotificacionController::class, 'store']);
+Route::get('/notificacionByUser/{id}', [NotificacionController::class, 'index']);
+
+Route::get('/notificacion/{id}', [NotificacionController::class, 'show']);
+
+Route::post('/notificacion/create/user', [NotificacionController::class, 'storeUser']);
+
+Route::post('/notificacion/create/intercambio', [NotificacionController::class, 'storeIntercambio']);
+
+Route::delete('/notificacion/delete/{id}', [NotificacionController::class, 'destroy']);
+
+

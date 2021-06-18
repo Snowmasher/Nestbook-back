@@ -38,6 +38,7 @@ class Canario extends Model
     protected $table = 'canarios';
 
     protected $primaryKey = 'id';
+    
     /**
      * The attributes that should be cast to native types.
      *
