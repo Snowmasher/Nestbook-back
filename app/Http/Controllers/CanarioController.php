@@ -96,14 +96,13 @@ class CanarioController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Canario  $canario
      * @return \Illuminate\Http\Response
      */
     public function intercambio(Request $request)
     {
-        Canario::where('id', '=', $request[0]['id_canario'])->update(array('id_usuario' => $request[0]['id_user']));
+        $canario = Canario::where('id', '=', $request[0]['id_canario'])->update(['id_usuario' => $request[0]['id_user']]);
 
-        Notificacion::destroy($request[0]['id']);
+        Notificacion::destroy($request[0]['id_notificacion']);
 
         return response()->json([
             'message' => 'success'
