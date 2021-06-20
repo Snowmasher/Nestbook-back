@@ -21,16 +21,6 @@ class PublicacionController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -62,17 +52,6 @@ class PublicacionController extends Controller
         $ret = Publicacion::where('id', '=', $id)->get();
 
         return json_decode($ret);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Publicacion  $publicacion
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Publicacion $publicacion)
-    {
-        //
     }
 
     /**
