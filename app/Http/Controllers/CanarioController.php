@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Canario;
 use App\Models\Notificacion;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -40,6 +41,13 @@ class CanarioController extends Controller
      */
     public function store(Request $request)
     {
+
+        if(Carbon::parse($request[0]['fecha_nacimiento']) > Carbon::now()){
+            return response()->json([
+                'message' => 'Error: Fecha no válida',
+            ]);
+        }
+
         Canario::create(array(
             "num_anilla" => $request[0]['num_anilla'],
             "num_anilla_padre" => $request[0]['num_anilla_padre'],

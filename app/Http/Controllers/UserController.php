@@ -143,9 +143,10 @@ class UserController extends Controller
 
         $user->name = $request[0]['name'];
         $user->real_name = $request[0]['real_name'];
-        $user->id_asociacion = $request[0]['id_asociacion'];
         $user->rol = 'U';
-        $user->password = $request[0]['password'];
+        if($request[0]['password'] != null && $request[0]['password'] != ''){
+            $user->password = Hash::make($request[0]['password']);
+        }
 
         $user->save();
 
@@ -171,6 +172,9 @@ class UserController extends Controller
         $user->real_name = $request[0]['real_name'];
         $user->rol = 'M';
         $user->password = Hash::make($request[0]['password']);
+        if($request[0]['password'] != null && $request[0]['password'] != ''){
+            $user->password = Hash::make($request[0]['password']);
+        }
 
         $asociacion = Asociacion::where('id_mod', '=', $request[0]['id'])->first();
 
