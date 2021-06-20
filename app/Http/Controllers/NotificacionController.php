@@ -6,6 +6,7 @@ use App\Models\Asociacion;
 use App\Models\Notificacion;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class NotificacionController extends Controller
 {
@@ -16,7 +17,13 @@ class NotificacionController extends Controller
      */
     public function index(int $id)
     {
-        $notificaciones = Notificacion::where('id_to', '=', $id)->get();
+        // $notificaciones = Notificacion::where('id_to', '=', $id)->get();
+
+        $notificaciones = Notificacion::where('id_to', '=', $id)
+        ->where('created_at', '<=', Carbon::today()->addDays(14))->get();
+
+        
+
         $notificaciones = json_decode($notificaciones);
         return $notificaciones;
     }

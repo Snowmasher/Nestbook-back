@@ -18,7 +18,6 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('id_asociacion');
             $table->string('name');
             $table->string('real_name');
-            $table->integer('avatar');
             $table->char('rol')->default('U');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

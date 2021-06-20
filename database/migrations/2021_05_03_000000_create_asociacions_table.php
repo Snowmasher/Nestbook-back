@@ -16,7 +16,7 @@ class CreateAsociacionsTable extends Migration
         Schema::create('asociacions', function (Blueprint $table) {
             $table->id();
             $table->string('nombre')->unique();
-            $table->string('url_img')->nullable();
+            $table->text('url_img')->nullable();
             $table->unsignedBigInteger('id_mod');
             $table->softDeletes();
             $table->timestamps();

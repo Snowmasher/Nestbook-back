@@ -19,7 +19,7 @@ class CreatePublicacionsTable extends Migration
             $table->foreign('id_asociacion')->references('id')->on('asociacions');
             $table->string('titulo');
             $table->text('contenido');
-            $table->string('url_img')->nullable();
+            $table->text('url_img')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
